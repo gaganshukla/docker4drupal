@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the activity tracking module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function activity_tracking_schema() {
+  $schema['activity_tracker'] = [
+    'description' => 'Create table used to store data of each actvity of users',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Unique ID for this record.',
+      ],
+      'entity_id' => [
+        'description' => 'Entity id of action performed',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'action' => [
+        'description' => 'Actions type Add, Update, Delete',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'bundle' => [
+        'description' => 'Name of the bundle',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'uid' => [
+        'description' => 'uid of contacts user',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'user_name' => [
+        'description' => 'Name of the user',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'ip' => [
+        'description' => 'Remote user IP addres t',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'user_agent' => [
+        'description' => 'user agent of browser',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => "Timestamp for the record insert.",
+      ],
+    ],
+    'indexes' => [
+      'actvity_tracker_uid' => ['uid'],
+      'actvity_tracker_entity' => ['entity_id'],
+      'actvity_tracker_created_timestamp' => ['created'],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
+}

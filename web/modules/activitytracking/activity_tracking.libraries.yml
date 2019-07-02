@@ -1,0 +1,5 @@
+activity_tracking.default_css:
+  version: VERSION
+  css:
+    component:
+      css/activity_tracking.css: {}

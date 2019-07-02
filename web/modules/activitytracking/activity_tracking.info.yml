@@ -1,0 +1,14 @@
+name: Activity Tracking
+type: module
+description: 'Allow system to track each activity performed by user.'
+# core: 8.x
+dependencies:
+  - drupal:user
+  - drupal:system (>=8.1.0)
+# core: '8.x'
+
+# Information added by Drupal.org packaging script on 2019-06-23
+version: '8.x-1.2'
+core: '8.x'
+project: 'activitytracking'
+datestamp: 1561291987

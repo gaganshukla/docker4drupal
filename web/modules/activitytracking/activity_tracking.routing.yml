@@ -1,0 +1,15 @@
+activity_tracking.activity_tracking_logs:
+  path: '/activitytrackinglog'
+  defaults:
+    _form: '\Drupal\activity_tracking\Form\ActivityTracking'
+    _title: 'Activity Tracking'
+  requirements:
+    _permission: 'activity tracking'
+  arguments: ['@database', '@request_stack', '@config.factory']
+activity_tracking.set_admin_settings:
+  path: '/admin/config/system/activity_tracking'
+  defaults:
+    _form: '\Drupal\activity_tracking\Form\ActivityTrackingSettingsForm'
+    _title: 'Activity tracking settings'
+  requirements:
+    _permission: 'administer site configuration'

@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Allow system to store activity into database.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function activity_tracking_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.activity_tracking':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t("A simple module that tracks the each activity on entity like insert, update or delete perform by user.") . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function activity_tracking_entity_insert(EntityInterface $entity) {
+
+  // Validate bundle name.
+  if (!empty($entity->bundle())) {
+    $trackingService = \Drupal::service('activity_tracking.logger');
+    $trackingService->logActivity($entity, 'add');
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function activity_tracking_entity_update(EntityInterface $entity) {
+
+  // Validate bundle name.
+  if (!empty($entity->bundle())) {
+    $trackingService = \Drupal::service('activity_tracking.logger');
+    $trackingService->logActivity($entity, 'update');
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function activity_tracking_entity_delete(EntityInterface $entity) {
+
+  // Validate bundle name.
+  if (!empty($entity->bundle())) {
+    $trackingService = \Drupal::service('activity_tracking.logger');
+    $trackingService->logActivity($entity, 'delete');
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function activity_tracking_page_attachments_alter(&$page) {
+  if (\Drupal::routeMatch()->getRouteName() === 'activity_tracking.activity_tracking_logs') {
+    $page['#attached']['library'][] = 'activity_tracking/activity_tracking.default_css';
+  }
+}

@@ -1,0 +1,5 @@
+activity_tracking.set_admin_settings:
+  title: 'Activity tracking settings'
+  parent: system.admin_config_system
+  description: 'Configure default activity tracking settings.'  
+  route_name: activity_tracking.set_admin_settings

@@ -1,0 +1,3 @@
+activity tracking:
+  title: 'View Activity logs'
+  restrict access: true

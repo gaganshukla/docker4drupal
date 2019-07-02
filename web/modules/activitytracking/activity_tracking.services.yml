@@ -1,0 +1,4 @@
+services:
+  activity_tracking.logger:
+    class: Drupal\activity_tracking\Services\ActivityTrackingService
+    arguments: ['@current_user', '@database', '@request_stack', '@config.factory', '@logger.factory']
